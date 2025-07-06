@@ -1,4 +1,4 @@
-# SynthRAD 2025 Solution: Task 2 - CBCT2CT translation
+# SynthRAD 2025 Challenge Solution: Task 2 - (CBCT2CT translation)[https://synthrad2025.grand-challenge.org]
 
 **VarDiFFormer**: CBCT to CT Translation with variational diffusion with UViT denoising;
 
