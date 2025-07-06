@@ -1,0 +1,70 @@
+# Default settings
+default:
+  experiment_name: "vdm_diffusion_separate_encoders_codebook-1"  # Updated name to reflect changes
+  make_logs: True
+  device: 0  # GPU device ID
+  random_seed: 42
+  checkpoint_dir: /workspace/data/checkpoints
+
+# Paths
+paths:
+  cbct_vqvae_config: "checkpoints/vqgan_3_768_new_data_cbct/config.yaml"
+  cbct_vq_checkpoint: "checkpoints/vqgan_3_768_new_data_cbct/model_1600.pt"
+  
+  ct_vqvae_config: "checkpoints/vqgan_3_768_new_data_ct/config.yaml"
+  ct_vq_checkpoint: "checkpoints/vqgan_3_768_new_data_ct/model_1600.pt"
+
+optim:
+  lr: 1e-4
+  weight_decay: 0.01
+
+# denoise nn
+uvit:
+  img_size: 32
+  patch_size: 2
+  in_chans: 2
+  embed_dim: 512
+  depth: 11
+  num_heads: 4
+  conv: True  # convolutional layer after transformer to remove artifacts
+
+
+# Data settings for latent space
+dataset:
+  data_path: "/workspace/data/Task2_2d"
+  anatomy: 
+    - "AB"
+    - "HN"
+    - "TH"   
+  modality:
+    - "cbct"
+    - "ct"  
+  interpolate: True # ["brain"], ["brain", "pelvis"]
+  interpolation_size: [128, 128]
+  train_batch_size: 6  # should be set to 1 for latent extraction
+  val_batch_size: 6  # should be set  to 1 for latent extraction
+  train_shuffle: True
+  val_shuffle: False
+  num_workers: 6
+  augment: False
+  rand_adj_contrast: 
+    prob: 0.5
+    gamma:
+      - .5
+      - 1.5
+  rand_affine:
+    prob: 0.5
+  minv: 0
+  maxv: 1
+
+
+# noise scheduling
+gamma_min: -5.
+gamma_max: 5.
+noise_schedule: "learned_linear"
+antithetic_time_sampling: True
+use_fourier_features: False
+
+num_steps: 100_000
+save_and_eval_every: 1000
+n_sample_steps: 200

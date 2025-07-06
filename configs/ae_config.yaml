@@ -1,0 +1,117 @@
+default:
+  random_seed:  42
+  device: 0  # "cpu"
+  experiment_name: test_debug
+
+optim:
+  amp: True
+  lr_generator: 1e-4
+  lr_discriminator: 5e-4
+  num_epochs: 5000
+  val_every: 1
+  log_interval: 1
+  save_interval: 200
+  checkpoint_dir: "/workspace/data/checkpoints"  # Store checkpoints within experiment directory
+
+aekl:
+  spatial_dims: 2
+  in_channels: 1
+  out_channels: 1
+
+vqvae:
+  spatial_dims: 2
+  in_channels: 1
+  out_channels: 1
+  num_channels:
+    128,
+    256,
+    512,
+    512
+  num_res_channels: 256
+  num_res_layers: 3
+  downsample_parameters:
+    1:
+      - 2  # stride
+      - 4  # kernel
+      - 1  # dilation
+      - 1   # padding
+    2:  
+      - 2
+      - 4
+      - 1
+      - 1
+    3:
+      - 1
+      - 3
+      - 1
+      - 1
+    4:
+      - 1
+      - 3
+      - 1
+      - 1   
+  upsample_parameters:
+    1:
+      - 1  # stride
+      - 3  # kernel
+      - 1  # dilation
+      - 1  # padding
+      - 0   # output padding
+    2:  
+      - 1
+      - 3
+      - 1
+      - 1
+      - 0
+    3:
+      - 2
+      - 4
+      - 1
+      - 1
+      - 0
+    4:
+      - 2
+      - 4
+      - 1
+      - 1
+      - 0
+  num_embeddings: 2048  # codebook length
+  embedding_dim: 1
+
+
+discriminator:
+  spatial_dims: 2
+  in_channels: 1
+  out_channels: 1
+  num_layers_d: 2
+  num_channels: 256
+
+dataset:
+  data_path: "/workspace/data/Task2_2d"
+  anatomy: 
+    - "AB"
+    - "HN"
+    - "TH"
+  modality:
+    #- "ct"  # both or comment one
+    - "cbct"
+  interpolate: True
+  interpolation_size: [128, 128]
+  train_batch_size: 16
+  val_batch_size: 16
+  train_shuffle: True
+  val_shuffle: False
+  num_workers: 8
+  minv: 0.0
+  maxv: 1.0
+
+  augment: True
+  rand_adj_contrast: 
+    prob: 0.5
+    gamma:
+      - .5
+      - 1.5
+  rand_affine:
+    prob: 0.5
+
+

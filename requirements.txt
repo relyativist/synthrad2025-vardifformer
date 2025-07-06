@@ -1,0 +1,31 @@
+# Core ML/DL packages
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
+
+# MONAI and medical imaging
+monai[itk]==1.4.0
+nibabel==5.3.2
+SimpleITK==2.5.0
+
+# Training utilities
+accelerate==1.6.0
+ema-pytorch==0.7.7
+torchinfo==1.8.0
+torcheval==0.0.7
+tensorboard==2.19.0
+
+# Data processing and visualization
+matplotlib==3.10.0
+numpy==1.26.4
+scipy==1.15.2
+pandas==2.2.3
+scikit-learn==1.6.1
+tqdm==4.66.5
+einops==0.8.1
+
+# Image processing
+Pillow==10.1.0
+
+# Configuration and utilities
+PyYAML==6.0.1
