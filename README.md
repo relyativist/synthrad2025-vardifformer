@@ -1,5 +1,6 @@
-# SynthRAD 2025 Challenge Solution: Task 2 - (CBCT2CT translation)[https://synthrad2025.grand-challenge.org]
+# SynthRAD 2025 Challenge Solution: Task 2 - CBCT-to-CT translation
 
+[Task description](https://synthrad2025.grand-challenge.org)
 **VarDiFFormer**: CBCT to CT Translation with variational diffusion with UViT denoising;
 
 > **⚠️ Notice**: This solution is designed for **2D processing only**. The 3D SynthRAD challenge dataset must be preprocessed to extract 2D slices before training.
